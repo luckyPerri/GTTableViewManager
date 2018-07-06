@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "GTTableViewManager"
   s.version      = "0.0.2"
-  s.summary      = "GTTableViewManager 简单易用的tableviewManager"
+  s.summary      = "GTTableViewManager"
    s.description  = "GTTableViewManager 简单易用的tableviewManager" 
 
   # This description is used to generate tags and improve search results.
