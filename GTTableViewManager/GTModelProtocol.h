@@ -10,6 +10,6 @@
 
 @protocol GTModelProtocol <NSObject>
 
-@required
 -(nonnull NSString* )tableViewCellName;
+
 @end

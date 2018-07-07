@@ -14,6 +14,11 @@ typedef void (^GTCellSelectorConfigBlock)(UITableView* tableView,
                                           GTTableViewCell* cell ,
                                           NSIndexPath* indexPath);
 
+typedef void (^GTCellSelectorConfigWithModelBlock)(UITableView* tableView,
+                                                   __kindof GTTableViewCell* cell ,
+                                                   NSIndexPath* indexPath,
+                                                   id content);
+
 typedef void (^GTTableViewDeleteBlock)(UITableView* tableView,
                                           id cell ,
                                           NSIndexPath* indexPath);
@@ -24,6 +29,7 @@ typedef void (^GTTableViewDeleteBlock)(UITableView* tableView,
 @property (nonatomic , strong)NSArray* indexArr;
 @property(nonatomic , strong)NSString* className;
 @property(nonatomic , copy)GTCellSelectorConfigBlock ConfigBlock;
+@property(nonatomic , copy)GTCellSelectorConfigWithModelBlock  configWithModelBlock;
 @property (nonatomic , copy)GTTableViewDeleteBlock deleteBlock;
 @property (nonatomic , assign)BOOL canEditable;
 

@@ -59,6 +59,10 @@
         self.ConfigBlock(tableView,cell,indexPath);
     }
     
+    if (self.configWithModelBlock) {
+        self.configWithModelBlock(tableView, cell, indexPath, item.content);
+    }
+    
     return cell;
     
 }

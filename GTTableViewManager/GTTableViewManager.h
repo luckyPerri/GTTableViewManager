@@ -13,6 +13,9 @@
 #import "GTModelProtocol.h"
 #import "MJRefresh.h"
 
+#import "GTTableViewCellModel.h"
+#import "GTCellModelProtocol.h"
+
 @class GTTableViewManager;
 
 @protocol  GTTableViewManagerDelegate<NSObject>
@@ -24,6 +27,11 @@
 typedef void (^didSelectCellBlock)(UITableView* tableview,
                                    GTTableViewCell* cell,
                                    NSIndexPath* indexPath);
+typedef void (^didSelectCellWithModelBlock)(UITableView* tableview,
+                                            GTTableViewCell* cell,
+                                            NSIndexPath* indexPath,
+                                            id content);
+
 
 typedef void (^tableViewBeginEditBlock)(UITableView* tableView,
                                         GTTableViewCell* cell,
@@ -58,16 +66,23 @@ typedef void (^tableViewEndRefreshBlock)(void);
 -(void)updateData:(GTCellObject *)obj atIndex:(NSInteger)index section:(NSInteger)section;
 -(void)updateData:(NSArray* )objs atSetion:(NSInteger)section animation:(UITableViewRowAnimation)animationType;
 //新的 根据model进行的更新 里面的model 必须继承GTModelProtocol协议
--(void)updateDataWithModels:(NSArray* )models fileterModels:(void (^)(NSArray* models))fileterblock;
+-(void)updateDataWithModels:(NSArray* )models fileterModels:(void (^)(NSArray* filterModels))fileterblock;
 
+//用新的数据结构进行更新数据信息
+-(void)updateWithModels:(NSArray* )models fileterModels:(void (^)(NSArray* filterModels))fileterblock;
 @property (nonatomic , assign)BOOL canEditable;
 
 @property(nonatomic , weak)id<GTTableViewManagerDelegate> delegate;
 
 @property(nonatomic , strong)NSString* myClassName;
 @property(nonatomic , strong)GTTableViewDataSource* dataSource;
+
 @property(nonatomic , copy)didSelectCellBlock didSelectCellBlock;
+@property (nonatomic , copy)didSelectCellWithModelBlock didselectWithModelBlock;
+
 @property(nonatomic , copy)GTCellSelectorConfigBlock configBlock;
+@property(nonatomic , copy)GTCellSelectorConfigWithModelBlock configWithModelBlock;
+
 @property (nonatomic , strong)GTTableViewDeleteBlock deleteBlock;
 @property (nonatomic , copy)tableViewBeginEditBlock beginEditBlock;
 @property (nonatomic , copy)tableViewEndEditBlock   endEditBlock;

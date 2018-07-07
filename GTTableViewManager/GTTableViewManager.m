@@ -138,7 +138,7 @@
     }
 }
 
--(void)updateDataWithModels:(NSArray* )models fileterModels:(void (^)(NSArray* models))fileterblock;{
+-(void)updateDataWithModels:(NSArray* )models fileterModels:(void (^)(NSArray* filterModels))fileterblock;{
     
     NSAssert([models isKindOfClass:[NSArray class]], @"gttableViewModel必须是数组");
     
@@ -146,7 +146,6 @@
     NSMutableArray* retModels = [NSMutableArray array];
     for (id obj in models) {
          NSAssert([models isKindOfClass:[NSArray class]], @"gttableViewModel内部必须是数组");
-        
         NSMutableArray* tempArr = [NSMutableArray array];
         NSMutableArray* tempModelArr = [NSMutableArray array];
         for (id<GTModelProtocol> model in obj) {
@@ -173,9 +172,40 @@
         fileterblock(retModels);
     }
     [self.tableview reloadData];
+}
+
+
+//用新的数据结构进行更新数据信息
+-(void)updateWithModels:(NSArray* )models fileterModels:(void (^)(NSArray* filterModels))fileterblock{
     
+    NSAssert([models isKindOfClass:[NSArray class]], @"gttableViewModel必须是数组");
     
-    
+    NSMutableArray* objects = [NSMutableArray array];
+    NSMutableArray* retModels = [NSMutableArray array];
+    for (id obj in models) {
+        NSAssert([models isKindOfClass:[NSArray class]], @"gttableViewModel内部必须是数组");
+        
+        NSMutableArray* tempArr = [NSMutableArray array];
+        NSMutableArray* tempModelArr = [NSMutableArray array];
+        for (id<GTCellModelProtocol> model in obj) {
+            
+            NSAssert([model conformsToProtocol:@protocol(GTCellModelProtocol)], @"model 必须继承这些协议才能使用");
+            GTCellObject* cellobj = [model cellObject];
+            if (cellobj) {
+                [tempArr addObject:cellobj];
+                [tempModelArr addObject:model];
+            }
+        }
+        if (tempArr.count !=0) {
+            [objects addObject:tempArr];
+            [retModels addObject:tempModelArr];
+        }
+    }
+    self.modelArr = [objects copy];
+    if (fileterblock) {
+        fileterblock(retModels);
+    }
+    [self.tableview reloadData];
     
 }
 
@@ -199,6 +229,11 @@
     GTTableViewCell* cell = (GTTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (self.didSelectCellBlock) {
         self.didSelectCellBlock(tableView, cell ,indexPath);
+    }
+    
+    id content = [self modelAtIndex:indexPath.row section:indexPath.section];
+    if (self.didselectWithModelBlock) {
+        self.didselectWithModelBlock(tableView, cell, indexPath, content);
     }
 }
 
@@ -297,6 +332,10 @@
         self.dataSourcer.ConfigBlock = configBlock;
     }
     
+}
+-(void)setConfigWithModelBlock:(GTCellSelectorConfigWithModelBlock)configWithModelBlock{
+    _configWithModelBlock = configWithModelBlock;
+    self.dataSourcer.configWithModelBlock = configWithModelBlock;
 }
 
 -(void)setDeleteBlock:(GTTableViewDeleteBlock)deleteBlock{

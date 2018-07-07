@@ -10,17 +10,25 @@
 
 @implementation GTTableViewCellModel
 
--(NSString* )tableViewCellName{
-    return @"GTTableViewCell";
-}
-
-
-//默认都是有效
--(BOOL )isVaild{
-    return YES;
-}
-
--(GTCellObject* )cellObject{
+-(nonnull NSString* )tableViewCellName{
     return nil;
 }
+-(CGFloat )tableViewCellHeight{
+    return 0;
+}
+-(GTCellObject* )cellObject{
+    
+    id content = [self validContent];
+    NSString* cellClsName = [self tableViewCellName];
+    
+    if (!content||!cellClsName) {
+        return nil;
+    }
+    return gtCellMake(cellClsName, content);
+}
+-(id )validContent{
+    return nil;
+}
+
+
 @end
