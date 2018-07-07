@@ -11,6 +11,7 @@
 #import "GTTableViewDataSource.h"
 #import "GTCellObject.h"
 #import "GTModelProtocol.h"
+#import "MJRefresh.h"
 
 @class GTTableViewManager;
 
@@ -39,7 +40,7 @@ typedef void (^tableViewWillDisplayCellBlock)(UITableView *tableView,
 
 typedef void (^tableViewDidScrollBlock)(UIScrollView* scrollView);
 typedef void (^tableViewDidEndScrollBlock)(UIScrollView* scrollView);
-typedef void (^tableViewEndRefreshBlock)();
+typedef void (^tableViewEndRefreshBlock)(void);
 
 @interface GTTableViewManager : NSObject<UITableViewDelegate,UIScrollViewDelegate>
 

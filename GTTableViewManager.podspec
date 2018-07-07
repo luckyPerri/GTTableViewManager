@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GTTableViewManager"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary      = "GTTableViewManager"
    s.description  = "GTTableViewManager 简单易用的tableviewManager" 
 
@@ -135,6 +135,7 @@ Pod::Spec.new do |s|
    s.dependency "JSONModel"
    s.dependency "Masonry"
    s.dependency "MJRefresh"
+   s.dependency "HKUIKitExtern"
 
 
 end

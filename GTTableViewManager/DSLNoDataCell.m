@@ -9,9 +9,10 @@
 #import "DSLNoDataCell.h"
 #import "GTNoDataModel.h"
 #import "Masonry.h"
+#import "HKUikitExternKit.h"
+
 
 @interface DSLNoDataCell ()
-
 
 @property (nonatomic , strong)UIImageView* noDataImageView;
 @property (nonatomic , strong)UILabel* showNoDataLab;
