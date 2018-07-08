@@ -17,6 +17,9 @@
 @property(nonatomic , strong)GTTableViewDataSource* dataSourcer;
 
 
+@property (nonatomic , strong )NSArray* modelArr;
+
+
 @property (nonatomic , strong)MJRefreshAutoNormalFooter* refreshFooter;
 @property (nonatomic , assign)NSInteger pageNo;
 
@@ -24,38 +27,24 @@
 
 @implementation GTTableViewManager
 
--(instancetype)initWithTableview:(UITableView*)tableView
-                           items:(NSArray*)contentItems
-              didSelectCellBlock:(didSelectCellBlock)selectCellBlock;{
-    
-    if (self = [super init]) {
-        self.canEditable = NO;
-        self.tableview = tableView;
-        self.tableview.delegate = self;
-        self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.modelArr = contentItems;
-        self.dataSourcer = [[GTTableViewDataSource alloc] initWithItems:contentItems];
-        self.tableview.dataSource = self.dataSourcer;
-        self.didSelectCellBlock = selectCellBlock;
-        self.tableview.showsVerticalScrollIndicator = NO;
-        self.pageNo = 0;
-        
-    }
+-(instancetype)initWithTableview:(UITableView*)tableView{
+      if (self = [super init]) {
+          self.canEditable = NO;
+          self.tableview = tableView;
+          self.tableview.delegate = self;
+          self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+          self.dataSourcer = [[GTTableViewDataSource alloc] initWithItems:nil];
+          self.tableview.dataSource = self.dataSourcer;
+          self.tableview.showsVerticalScrollIndicator = NO;
+          self.pageNo = 0;
+      }
     return self;
 }
 
-
-
--(instancetype)initWithTableview:(UITableView*)tableView
-                           items:(NSArray*)contentItems{
-    return  [self initWithTableview:tableView items:contentItems didSelectCellBlock:nil];
-}
-
-
 -(id)modelAtIndex:(NSInteger )index section:(NSInteger )section{
     
-    if (section<self.modelArr.count) {
-        NSArray* sectionObjcts = self.modelArr[section];
+    if (section<self.cellObjectsArr.count) {
+        NSArray* sectionObjcts = self.cellObjectsArr[section];
         if ([sectionObjcts isKindOfClass:[NSArray class]]&&
             index < sectionObjcts.count) {
             GTCellObject* obj = sectionObjcts[index];
@@ -72,7 +61,7 @@
         return;
     }
     
-    NSMutableArray* tempArr = [self.modelArr mutableCopy];
+    NSMutableArray* tempArr = [self.cellObjectsArr mutableCopy];
     if (section < tempArr.count) {
         
         NSMutableArray* rowArr = [tempArr[section] mutableCopy];
@@ -80,7 +69,7 @@
             
             rowArr[index] = obj;
             tempArr[section] = rowArr;
-            self.modelArr = [tempArr copy];
+            self.cellObjectsArr = [tempArr copy];
             [self.tableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:section]] withRowAnimation:UITableViewRowAnimationNone];
         }
         
@@ -93,15 +82,15 @@
         return;
     }
     
-    NSArray* originArr = self.modelArr[section];
-    NSMutableArray* tempArr = [self.modelArr mutableCopy];
+    NSArray* originArr = self.cellObjectsArr[section];
+    NSMutableArray* tempArr = [self.cellObjectsArr mutableCopy];
     if (section<tempArr.count&&section>=0) {
         
         if (originArr.count == objs.count) {
             
             NSMutableArray* updateIndexArr = [NSMutableArray array];
             tempArr[section] = objs;
-            self.modelArr = [tempArr copy];
+            self.cellObjectsArr = [tempArr copy];
             
             for (NSInteger index = 0; index<originArr.count; index++) {
                 [updateIndexArr addObject:[NSIndexPath indexPathForRow:index inSection:section]];
@@ -112,7 +101,7 @@
             
             
             tempArr[section] = @[];
-            self.modelArr = [tempArr copy];
+            self.cellObjectsArr = [tempArr copy];
             
             NSMutableArray* deleteArr = [NSMutableArray array];
             for (NSInteger deleteIndex = 0; deleteIndex < originArr.count; deleteIndex++) {
@@ -124,7 +113,7 @@
             }
             
             tempArr[section] = objs;
-            self.modelArr = [tempArr copy];
+            self.cellObjectsArr = [tempArr copy];
             NSMutableArray* insertArr = [NSMutableArray array];
             
             for (NSInteger insertIndex = 0; insertIndex < objs.count; insertIndex++) {
@@ -167,7 +156,8 @@
             [retModels addObject:tempModelArr];
         }
     }
-    self.modelArr = [objects copy];
+    self.cellObjectsArr = [objects copy];
+    self.modelArr = retModels;
     if (fileterblock) {
         fileterblock(retModels);
     }
@@ -176,7 +166,7 @@
 
 
 //用新的数据结构进行更新数据信息
--(void)updateWithModels:(NSArray* )models fileterModels:(void (^)(NSArray* filterModels))fileterblock{
+-(void)updateUIWithModels:(NSArray<NSArray<GTCellModelProtocol>*>* )models fileterModels:(void (^)(NSArray<NSArray<GTCellModelProtocol>*>* filterModels))fileterblock{
     
     NSAssert([models isKindOfClass:[NSArray class]], @"gttableViewModel必须是数组");
     
@@ -201,7 +191,8 @@
             [retModels addObject:tempModelArr];
         }
     }
-    self.modelArr = [objects copy];
+    self.cellObjectsArr = [objects copy];
+    self.modelArr = retModels;
     if (fileterblock) {
         fileterblock(retModels);
     }
@@ -213,7 +204,7 @@
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    GTCellObject* object= self.modelArr[indexPath.section][indexPath.row];
+    GTCellObject* object= self.cellObjectsArr[indexPath.section][indexPath.row];
     CGFloat height = 44;
     if ([object isKindOfClass:[GTCellObject class]]) {
         Class cls = object.cellClass;
@@ -303,9 +294,9 @@
 }
 
 
--(void)setModelArr:(NSArray *)modelArr{
-    _modelArr = modelArr;
-    self.dataSourcer.contentArr = modelArr;
+-(void)setCellObjectsArr:(NSArray *)cellObjectsArr{
+    _cellObjectsArr = cellObjectsArr;
+    self.dataSourcer.contentArr = cellObjectsArr;
 }
 #pragma mark - ontapRefresh
 
