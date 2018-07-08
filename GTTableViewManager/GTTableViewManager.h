@@ -55,7 +55,7 @@ typedef void (^tableViewEndRefreshBlock)(void);
 
 
 @property(nonatomic , weak)UITableView* tableview;
-//二维数组，内部每个数组都是section 这个本质其实是objects的array
+//二维数组，内部每个数组都是section 这个本质其实是gtcellObjects的array
 @property(nonatomic , strong)NSArray* modelArr;
 
 @property (nonatomic , strong)NSArray* indexArr;

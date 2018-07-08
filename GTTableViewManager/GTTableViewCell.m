@@ -37,7 +37,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.bottomLine.frame =CGRectMake(self.bottomLinePadding, self.frame.size.height-0.5 ,self.frame.size.width,  _bottomLineWeight);
+    self.bottomLine.frame =CGRectMake(self.bottomLinePadding, self.frame.size.height-0.5 ,self.frame.size.width - self.bottomLinePadding - self.bottomLineRightPadding ,  _bottomLineWeight);
     if (self.isEditing) {
         [self sendSubviewToBack:self.contentView];
     }

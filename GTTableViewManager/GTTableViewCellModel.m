@@ -27,7 +27,7 @@
     return gtCellMake(cellClsName, content);
 }
 -(id )validContent{
-    return nil;
+    return self;
 }
 
 

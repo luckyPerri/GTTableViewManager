@@ -16,6 +16,7 @@
 @property (nonatomic,assign)BOOL showBottomLine;
 @property (nonatomic,strong)UIColor *bottomLineColor; //default #DDDDDD
 @property (nonatomic,assign)CGFloat bottomLinePadding;
+@property (nonatomic,assign)CGFloat bottomLineRightPadding;
 @property (nonatomic,assign)UIEdgeInsets bottomLineInset; //default {0,0,0,0}
 @property (nonatomic,assign)CGFloat bottomLineWeight;
 
