@@ -6,11 +6,10 @@
 //
 //
 
-#import <JSONModel/JSONModel.h>
 #import "GTCellObject.h"
 #import "GTModelProtocol.h"
 #import "GTCellModelProtocol.h"
-@interface GTTableViewCellModel : JSONModel<GTCellModelProtocol>
+@interface GTTableViewCellModel : NSObject<GTCellModelProtocol>
 
 
 

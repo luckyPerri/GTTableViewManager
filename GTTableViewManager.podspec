@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GTTableViewManager"
-  s.version      = "0.0.9"
+  s.version      = "0.0.10"
   s.summary      = "GTTableViewManager"
    s.description  = "GTTableViewManager 简单易用的tableviewManager" 
 
@@ -132,10 +132,5 @@ Pod::Spec.new do |s|
   # s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-   s.dependency "JSONModel"
-   s.dependency "Masonry"
    s.dependency "MJRefresh"
-   s.dependency "HKUIKitExtern"
-
-
 end
