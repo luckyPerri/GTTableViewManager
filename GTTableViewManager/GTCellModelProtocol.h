@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GTCellObject.h"
 
 @protocol GTCellModelProtocol <NSObject>
 
