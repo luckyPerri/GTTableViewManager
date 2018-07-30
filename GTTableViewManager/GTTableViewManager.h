@@ -11,7 +11,7 @@
 #import "GTTableViewDataSource.h"
 #import "GTCellObject.h"
 #import "GTModelProtocol.h"
-//#import "MJRefresh.h"
+#import "MJRefresh.h"
 
 #import "GTTableViewCellModel.h"
 #import "GTCellModelProtocol.h"

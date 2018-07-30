@@ -20,7 +20,7 @@
 @property (nonatomic , strong )NSArray* modelArr;
 
 
-//@property (nonatomic , strong)MJRefreshAutoNormalFooter* refreshFooter;
+@property (nonatomic , strong)MJRefreshAutoNormalFooter* refreshFooter;
 @property (nonatomic , assign)NSInteger pageNo;
 
 @end
@@ -300,20 +300,20 @@
 }
 #pragma mark - ontapRefresh
 
-//-(void)onTapPullDown:(id)sender{
-//
-//    self.pageNo = 0;
-//    if (self.RefreshBlock) {
-//        self.RefreshBlock(self.pageNo);
-//    }
-//}
-//
-//-(void)onTapPullUp:(id)sender{
-//    self.pageNo++;
-//    if (self.RefreshBlock) {
-//        self.RefreshBlock(self.pageNo);
-//    }
-//}
+-(void)onTapPullDown:(id)sender{
+
+    self.pageNo = 0;
+    if (self.RefreshBlock) {
+        self.RefreshBlock(self.pageNo);
+    }
+}
+
+-(void)onTapPullUp:(id)sender{
+    self.pageNo++;
+    if (self.RefreshBlock) {
+        self.RefreshBlock(self.pageNo);
+    }
+}
 
 #pragma mark - setter and getter
 
@@ -389,35 +389,35 @@
     self.dataSourcer.canEditable = _canEditable;
 }
 
-//-(MJRefreshHeader* )refreshHeader{
-//    if (!_refreshHeader) {
-//        _refreshHeader = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(onTapPullDown:)];
-//        __weak typeof(self) weakSelf = self;
-//        [_refreshHeader setEndRefreshingCompletionBlock:^(){
-//            if (weakSelf.endRefreshBlock) {
-//                weakSelf.endRefreshBlock();
-//            }
-//        }];
-//    }
-//    return _refreshHeader;
-//}
-//
-//-(MJRefreshAutoNormalFooter* )refreshFooter{
-//    if (!_refreshFooter) {
-//        _refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(onTapPullUp:)];
-//        
-//    }
-//    return _refreshFooter;
-//}
-//
-//-(void)setPullDownEnable:(BOOL)pullDownEnable{
-//    _pullDownEnable = pullDownEnable;
-//    self.tableview.mj_header =pullDownEnable?self.refreshHeader:nil;
-//    
-//}
-//-(void)setPullUpEnable:(BOOL)pullUpEnable{
-//    
-//    _pullUpEnable = pullUpEnable;
-//    self.tableview.mj_footer = pullUpEnable?self.refreshFooter:nil;
-//}
+-(MJRefreshHeader* )refreshHeader{
+    if (!_refreshHeader) {
+        _refreshHeader = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(onTapPullDown:)];
+        __weak typeof(self) weakSelf = self;
+        [_refreshHeader setEndRefreshingCompletionBlock:^(){
+            if (weakSelf.endRefreshBlock) {
+                weakSelf.endRefreshBlock();
+            }
+        }];
+    }
+    return _refreshHeader;
+}
+
+-(MJRefreshAutoNormalFooter* )refreshFooter{
+    if (!_refreshFooter) {
+        _refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(onTapPullUp:)];
+        
+    }
+    return _refreshFooter;
+}
+
+-(void)setPullDownEnable:(BOOL)pullDownEnable{
+    _pullDownEnable = pullDownEnable;
+    self.tableview.mj_header =pullDownEnable?self.refreshHeader:nil;
+    
+}
+-(void)setPullUpEnable:(BOOL)pullUpEnable{
+    
+    _pullUpEnable = pullUpEnable;
+    self.tableview.mj_footer = pullUpEnable?self.refreshFooter:nil;
+}
 @end
