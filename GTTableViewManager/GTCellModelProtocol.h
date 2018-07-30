@@ -9,7 +9,7 @@
 
 @protocol GTCellModelProtocol <NSObject>
 
--(nonnull NSString* )tableViewCellName;
+-(NSString* )tableViewCellName;
 -(CGFloat )tableViewCellHeight;
--(nullable GTCellObject* )cellObject;
+-(GTCellObject* )cellObject;
 @end
