@@ -11,6 +11,5 @@
 
 -(nonnull NSString* )tableViewCellName;
 -(CGFloat )tableViewCellHeight;
--(GTCellObject* )cellObject;
--(id )validContent;
+-(nullable GTCellObject* )cellObject;
 @end

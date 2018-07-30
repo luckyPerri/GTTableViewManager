@@ -8,7 +8,6 @@
 
 #import "GTCellObject.h"
 
-
 GTCellObject* gtCellMake(NSString* identifier, id content){
     GTCellObject* item = [[GTCellObject alloc] init];
     if (identifier&&[identifier isKindOfClass:[NSString class]]) {

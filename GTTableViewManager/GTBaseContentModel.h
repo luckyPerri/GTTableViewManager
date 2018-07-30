@@ -13,6 +13,7 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subTitle;
+
 @property (nonatomic , strong)NSString* imageName;
 @property (nonatomic, copy) NSString *placeHolder;
 @property (nonatomic, copy) NSString *key;
