@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GTTableViewManager"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.summary      = "GTTableViewManager"
    s.description  = "GTTableViewManager 简单易用的tableviewManager" 
 
@@ -52,7 +52,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "huzhaoke" => "zhizaozhe@126.com" }
+  s.author             = { "luckyPerri" => "zhizaozhe@126.com" }
   # Or just: s.author    = "huzhaoke"
   # s.authors            = { "huzhaoke" => "huzhaoke@didichuxing.comm" }
   # s.social_media_url   = "http://twitter.com/huzhaoke"
@@ -117,7 +117,7 @@ Pod::Spec.new do |s|
   #
 
   # s.framework  = "SomeFramework"
-   s.frameworks = 'Foundation', 'UIKit'
+   s.frameworks = 'UIKit', 'QuartzCore', 'Foundation'
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
