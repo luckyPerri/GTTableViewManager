@@ -10,7 +10,7 @@
 #import "GTTableViewDataSource.h"
 #import "GTCellObject.h"
 #import "GTModelProtocol.h"
-#import "MJRefresh.h"
+//#import "MJRefresh.h"
 
 @interface GTTableViewManager ()
 
@@ -18,10 +18,8 @@
 
 
 @property (nonatomic , strong )NSArray* modelArr;
-
-
-@property (nonatomic , strong)MJRefreshAutoNormalFooter* refreshFooter;
-@property (nonatomic , strong)MJRefreshHeader* refreshHeader;
+//@property (nonatomic , strong)MJRefreshAutoNormalFooter* refreshFooter;
+//@property (nonatomic , strong)MJRefreshHeader* refreshHeader;
 @property (nonatomic , assign)NSInteger pageNo;
 
 @end
@@ -389,36 +387,36 @@
     _canEditable = canEditable;
     self.dataSourcer.canEditable = _canEditable;
 }
-
--(MJRefreshHeader* )refreshHeader{
-    if (!_refreshHeader) {
-        _refreshHeader = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(onTapPullDown:)];
-        __weak typeof(self) weakSelf = self;
-        [_refreshHeader setEndRefreshingCompletionBlock:^(){
-            if (weakSelf.endRefreshBlock) {
-                weakSelf.endRefreshBlock();
-            }
-        }];
-    }
-    return _refreshHeader;
-}
-
--(MJRefreshAutoNormalFooter* )refreshFooter{
-    if (!_refreshFooter) {
-        _refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(onTapPullUp:)];
-        
-    }
-    return _refreshFooter;
-}
-
--(void)setPullDownEnable:(BOOL)pullDownEnable{
-    _pullDownEnable = pullDownEnable;
-    self.tableview.mj_header =pullDownEnable?self.refreshHeader:nil;
-    
-}
--(void)setPullUpEnable:(BOOL)pullUpEnable{
-    
-    _pullUpEnable = pullUpEnable;
-    self.tableview.mj_footer = pullUpEnable?self.refreshFooter:nil;
-}
+//
+//-(MJRefreshHeader* )refreshHeader{
+//    if (!_refreshHeader) {
+//        _refreshHeader = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(onTapPullDown:)];
+//        __weak typeof(self) weakSelf = self;
+//        [_refreshHeader setEndRefreshingCompletionBlock:^(){
+//            if (weakSelf.endRefreshBlock) {
+//                weakSelf.endRefreshBlock();
+//            }
+//        }];
+//    }
+//    return _refreshHeader;
+//}
+//
+//-(MJRefreshAutoNormalFooter* )refreshFooter{
+//    if (!_refreshFooter) {
+//        _refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(onTapPullUp:)];
+//
+//    }
+//    return _refreshFooter;
+//}
+//
+//-(void)setPullDownEnable:(BOOL)pullDownEnable{
+//    _pullDownEnable = pullDownEnable;
+//    self.tableview.mj_header =pullDownEnable?self.refreshHeader:nil;
+//
+//}
+//-(void)setPullUpEnable:(BOOL)pullUpEnable{
+//
+//    _pullUpEnable = pullUpEnable;
+//    self.tableview.mj_footer = pullUpEnable?self.refreshFooter:nil;
+//}
 @end
