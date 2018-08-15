@@ -9,8 +9,8 @@
 #import "GTTableViewManager.h"
 #import "GTTableViewDataSource.h"
 #import "GTCellObject.h"
-//#import <MJRefresh.h>
 #import "GTModelProtocol.h"
+#import "MJRefresh.h"
 
 @interface GTTableViewManager ()
 
@@ -21,6 +21,7 @@
 
 
 @property (nonatomic , strong)MJRefreshAutoNormalFooter* refreshFooter;
+@property (nonatomic , strong)MJRefreshHeader* refreshHeader;
 @property (nonatomic , assign)NSInteger pageNo;
 
 @end

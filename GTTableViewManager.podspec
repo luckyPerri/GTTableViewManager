@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GTTableViewManager"
-  s.version      = "0.0.17"
+  s.version      = "0.1.3"
   s.summary      = "GTTableViewManager"
    s.description  = "GTTableViewManager 简单易用的tableviewManager" 
 
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/luckyPerri/GTTableViewManager.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/luckyPerri/GTTableViewManager.git", :tag => s.version }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  =  "GTTableViewManager/**/*"
+  s.source_files  =  "GTTableViewManager/*.{h,m}"
   #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
@@ -117,7 +117,7 @@ Pod::Spec.new do |s|
   #
 
   # s.framework  = "SomeFramework"
-   s.frameworks = "Foundation", "UIKit"
+   s.frameworks = 'Foundation', 'UIKit'
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
@@ -132,5 +132,5 @@ Pod::Spec.new do |s|
    s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-   #s.dependency "MJRefresh"
+   s.dependency 'MJRefresh'
 end
